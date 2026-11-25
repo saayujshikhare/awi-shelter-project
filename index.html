@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>valley humane society project</title>
+    
+    <!-- google fonts: inter for minimal typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- tailwind css -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- tailwind configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        theme: {
+                            cream: '#fdfbf9',         /* pastel white/cream */
+                            lightBrown: '#e8d8ce',    /* light pastel brown */
+                            brown: '#bfa89a',         /* primary pastel brown */
+                            darkBg: '#2a2421',        /* dark mode background */
+                            darkCard: '#332d29',      /* dark mode element */
+                            textLight: '#4a3f35',     /* text in light mode */
+                            textDark: '#e8d8ce',      /* text in dark mode */
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(191, 168, 154, 0.15)',
+                        'soft-dark': '0 10px 40px -10px rgba(0, 0, 0, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* global lowercase rule per request */
+        body {
+            text-transform: lowercase;
+        }
+
+        /* custom styling for radios and checkboxes to match pastel theme */
+        input[type="radio"], input[type="checkbox"] {
+            accent-color: #bfa89a;
+            cursor: pointer;
+        }
+
+        /* form section transitions */
+        .dynamic-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .dynamic-section.active {
+            display: flex;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-theme-cream dark:bg-theme-darkBg text-theme-textLight dark:text-theme-textDark font-sans antialiased transition-colors duration-500 min-h-screen flex flex-col selection:bg-theme-brown selection:text-white">
+
+    <!-- top navigation with dark mode toggle -->
+    <nav class="w-full max-w-4xl mx-auto px-6 py-8 flex justify-between items-center">
+        <div class="font-medium tracking-wide">
+            awi <span class="mx-2 text-theme-brown font-light">x</span> valley humane society
+        </div>
+        <button id="theme-toggle" class="flex items-center gap-2 text-sm px-4 py-2 rounded-full border border-theme-brown/30 hover:bg-theme-brown hover:text-white dark:border-theme-brown/50 dark:hover:bg-theme-brown dark:hover:text-theme-darkBg transition-all duration-300">
+            <span id="theme-text">dark mode</span>
+            <svg id="theme-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- main content -->
+    <main class="flex-grow w-full max-w-4xl mx-auto px-6 py-12 md:py-16 flex flex-col gap-16">
+        
+        <!-- hero text -->
+        <section class="text-center max-w-2xl mx-auto space-y-6">
+            <h1 class="text-3xl md:text-4xl font-light tracking-tight text-theme-brown leading-tight">
+                animal welfare improvement project
+            </h1>
+            <p class="text-base md:text-lg font-light leading-relaxed opacity-80">
+                hi! we're a group of 7th graders from pleasanton and dublin working on a project to help local shelter animals. we've partnered with the valley humane society to collect toys, supplies, and donations. please fill out the form below to let us know how you'd like to help.
+            </p>
+        </section>
+
+        <!-- form wrapper -->
+        <section class="w-full max-w-2xl mx-auto">
+            <div id="form-container" class="bg-white dark:bg-theme-darkCard rounded-3xl p-8 md:p-12 shadow-soft dark:shadow-soft-dark border border-theme-lightBrown/50 dark:border-white/5 transition-colors duration-500">
+                <form id="donation-form" class="flex flex-col gap-10">
+                    
+                    <!-- standard fields -->
+                    <div class="space-y-8">
+                        <div class="flex flex-col gap-2">
+                            <label for="name" class="font-medium text-sm opacity-90">first and last name <span class="text-theme-brown">*</span></label>
+                            <input type="text" id="name" name="name" required class="bg-transparent border border-theme-lightBrown dark:border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-theme-brown focus:ring-1 focus:ring-theme-brown transition-all w-full text-sm">
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <div class="flex flex-col gap-2 flex-1">
+                                <label for="email" class="font-medium text-sm opacity-90">email address <span class="text-theme-brown">*</span></label>
+                                <input type="email" id="email" name="email" required class="bg-transparent border border-theme-lightBrown dark:border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-theme-brown focus:ring-1 focus:ring-theme-brown transition-all w-full text-sm">
+                            </div>
+                            <div class="flex flex-col gap-2 flex-1">
+                                <label for="phone" class="font-medium text-sm opacity-90">phone number</label>
+                                <input type="tel" id="phone" name="phone" class="bg-transparent border border-theme-lightBrown dark:border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-theme-brown focus:ring-1 focus:ring-theme-brown transition-all w-full text-sm">
+                            </div>
+                        </div>
+
+                        <!-- radio selection for dynamic logic -->
+                        <div class="flex flex-col gap-4 pt-2">
+                            <label class="font-medium text-sm opacity-90">how are you willing to help out? <span class="text-theme-brown">*</span></label>
+                            <div class="flex flex-col sm:flex-row flex-wrap gap-4 opacity-80 text-sm">
+                                <label class="flex items-center gap-2 cursor-pointer hover:text-theme-brown transition-colors">
+                                    <input type="radio" name="help_type" value="time" required class="w-4 h-4"> 
+                                    <span>time</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer hover:text-theme-brown transition-colors">
+                                    <input type="radio" name="help_type" value="materials" required class="w-4 h-4"> 
+                                    <span>materials</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer hover:text-theme-brown transition-colors">
+                                    <input type="radio" name="help_type" value="funds" required class="w-4 h-4"> 
+                                    <span>funds</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer hover:text-theme-brown transition-colors">
+                                    <input type="radio" name="help_type" value="multiple" required class="w-4 h-4"> 
+                                    <span>multiple</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- dynamic sections container -->
+                    <div id="dynamic-sections-container" class="space-y-8">
+                        
+                        <!-- time section -->
+                        <div id="section-time" class="dynamic-section flex-col gap-3 p-6 rounded-2xl bg-theme-lightBrown/20 dark:bg-white/5 border border-theme-lightBrown/30 dark:border-white/5">
+                            <p class="font-medium text-sm mb-2 text-theme-brown">time commitment details</p>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm opacity-80 hover:text-theme-brown transition-colors">
+                                <input type="checkbox" name="time_opt" value="event_join" class="w-4 h-4"> joining us at an event
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm opacity-80 hover:text-theme-brown transition-colors">
+                                <input type="checkbox" name="time_opt" value="event_host" class="w-4 h-4"> helping us host an event
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm opacity-80 hover:text-theme-brown transition-colors">
+                                <input type="checkbox" name="time_opt" value="foster" class="w-4 h-4"> fostering an animal for any amount of time; from a few days to a few weeks.
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer text-sm opacity-80 hover:text-theme-brown transition-colors">
+                                <input type="checkbox" name="time_opt" value="attention" class="w-4 h-4"> bringing more attention to our cause
+                            </label>
+                        </div>
+
+                        <!-- materials section -->
+                        <div id="section-materials" class="dynamic-section flex-col gap-8 p-6 rounded-2xl bg-theme-lightBrown/20 dark:bg-white/5 border border-theme-lightBrown/30 dark:border-white/5">
+                            
+                            <div class="flex flex-col gap-3">
+                                <p class="font-medium text-sm mb-2 text-theme-brown">materials you can provide</p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm opacity-80">
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="mat_opt" class="w-4 h-4"> wooden rods</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="mat_opt" class="w-4 h-4"> string</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="mat_opt" class="w-4 h-4"> fleece strips</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="mat_opt" class="w-4 h-4"> ribbon</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="mat_opt" class="w-4 h-4"> fabric scraps</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="mat_opt" class="w-4 h-4"> pom-poms</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="mat_opt" class="w-4 h-4"> your finished toy</label>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-2">
+                                <label for="ideas" class="font-medium text-sm opacity-90">if you have a different idea, what it's called and how is it made?</label>
+                                <textarea id="ideas" rows="3" class="bg-transparent border border-theme-brown/30 dark:border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-theme-brown focus:ring-1 focus:ring-theme-brown transition-all w-full text-sm resize-none"></textarea>
+                            </div>
+
+                            <div class="flex flex-col gap-3">
+                                <p class="font-medium text-sm mb-2 text-theme-brown">vhs specific donations</p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm opacity-80">
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="vhs_opt" class="w-4 h-4"> dish soap</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="vhs_opt" class="w-4 h-4"> baby wipes</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="vhs_opt" class="w-4 h-4"> ziploc bags</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="vhs_opt" class="w-4 h-4"> cardboard trays</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="vhs_opt" class="w-4 h-4"> plastic cereal/kibble storage containers</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="vhs_opt" class="w-4 h-4"> white copy paper</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="vhs_opt" class="w-4 h-4"> 4 oz or 6 oz paper food trays</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="vhs_opt" class="w-4 h-4"> cat treats</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="vhs_opt" class="w-4 h-4"> dog treats</label>
+                                    <label class="flex items-center gap-3 cursor-pointer hover:text-theme-brown transition-colors"><input type="checkbox" name="vhs_opt" class="w-4 h-4"> gift cards</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- funds section -->
+                        <div id="section-funds" class="dynamic-section flex-col gap-3 p-6 rounded-2xl bg-theme-lightBrown/20 dark:bg-white/5 border border-theme-lightBrown/30 dark:border-white/5">
+                            <p class="font-medium text-sm text-theme-brown mb-1">financial support</p>
+                            <p class="text-sm opacity-80 leading-relaxed">
+                                how to provide donations: please fill out a check to valley humane society with your desired amount and put your team name as the memo!
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- drop off instructions (always visible) -->
+                    <div id="dropoff-instructions" class="pt-6 border-t border-theme-lightBrown/50 dark:border-white/10 text-sm opacity-80 leading-relaxed space-y-4">
+                        <p>please deliver any large items in a delivery box to 2557 glen isle ave with a label that clearly indicates vhs or awi.</p>
+                        <p>please put any checks and bills in a sealed envelope and mail it to 2557 glen isle ave.</p>
+                        <p class="font-medium text-theme-brown">donations will be accepted through february 5th, 2027!</p>
+                    </div>
+                    
+                    <!-- submit button -->
+                    <div class="pt-4">
+                        <button type="submit" class="w-full px-8 py-4 bg-theme-brown text-white dark:text-theme-darkBg rounded-xl hover:bg-theme-brown/90 shadow-soft hover:-translate-y-0.5 transition-all duration-300 font-medium">
+                            submit details
+                        </button>
+                    </div>
+                </form>
+
+                <!-- success message (hidden initially) -->
+                <div id="success-message" class="hidden flex-col items-center justify-center text-center py-16 space-y-4">
+                    <div class="w-16 h-16 rounded-full bg-theme-lightBrown/30 text-theme-brown flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-light text-theme-brown">thank you for your support!</h2>
+                    <p class="opacity-70 text-sm">your contribution makes a huge difference for the animals.</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- footer -->
+    <footer class="w-full max-w-4xl mx-auto px-6 py-8 mb-4 text-center border-t border-theme-lightBrown/30 dark:border-white/5 mt-auto">
+        <p class="text-sm font-medium tracking-wide text-theme-brown opacity-90">
+            awi. because every shelter pet deserves to feel loved.
+        </p>
+    </footer>
+
+    <!-- scripts for logic and dark mode -->
+    <script>
+        // DOM Elements
+        const form = document.getElementById('donation-form');
+        const successMessage = document.getElementById('success-message');
+        const radioButtons = document.querySelectorAll('input[name="help_type"]');
+        
+        // Sections
+        const sectionTime = document.getElementById('section-time');
+        const sectionMaterials = document.getElementById('section-materials');
+        const sectionFunds = document.getElementById('section-funds');
+
+        // Dark mode elements
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeText = document.getElementById('theme-text');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        // Icons for toggle
+        const moonIcon = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>`;
+        const sunIcon = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>`;
+
+        // Handle Dynamic Form Sections
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const val = e.target.value;
+                
+                // Determine visibility
+                const showTime = val === 'time' || val === 'multiple';
+                const showMaterials = val === 'materials' || val === 'multiple';
+                const showFunds = val === 'funds' || val === 'multiple';
+
+                // Toggle classes
+                showTime ? sectionTime.classList.add('active') : sectionTime.classList.remove('active');
+                showMaterials ? sectionMaterials.classList.add('active') : sectionMaterials.classList.remove('active');
+                showFunds ? sectionFunds.classList.add('active') : sectionFunds.classList.remove('active');
+            });
+        });
+
+        // Handle Form Submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Fade out form and fade in success message
+            form.style.opacity = '0';
+            setTimeout(() => {
+                form.style.display = 'none';
+                successMessage.classList.remove('hidden');
+                successMessage.classList.add('flex');
+                
+                // Add simple fade in animation
+                successMessage.style.opacity = '0';
+                setTimeout(() => {
+                    successMessage.style.transition = 'opacity 0.5s ease';
+                    successMessage.style.opacity = '1';
+                }, 50);
+                
+            }, 300);
+        });
+
+        // Dark Mode Logic
+        function initTheme() {
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                htmlElement.classList.add('dark');
+                updateBtnUI('dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                updateBtnUI('light');
+            }
+        }
+
+        function updateBtnUI(theme) {
+            if (theme === 'dark') {
+                themeText.textContent = 'light mode';
+                themeIcon.innerHTML = sunIcon;
+            } else {
+                themeText.textContent = 'dark mode';
+                themeIcon.innerHTML = moonIcon;
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            const isDark = htmlElement.classList.contains('dark');
+            
+            if (isDark) {
+                localStorage.setItem('theme', 'dark');
+                updateBtnUI('dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+                updateBtnUI('light');
+            }
+        });
+
+        // Initialize on load
+        initTheme();
+    </script>
+</body>
+</html>
